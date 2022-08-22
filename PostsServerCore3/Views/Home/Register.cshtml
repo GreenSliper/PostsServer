@@ -1,0 +1,28 @@
+﻿@{
+}
+@model RegisterViewModel
+
+<h1>Registration</h1>
+
+<form method="post" asp-controller="Home" asp-action="Register" asp-validation-summary="All">
+    <div>
+        <div class="display-8" style="color:red;" asp-validation-summary="ModelOnly"></div>
+        
+        <strong><label class="display-8" asp-for="UserName"></label></strong>
+        <br />
+        <input type="text" class="display-8 line-field" placeholder="Name" maxlength="50" style="width:100%" asp-for="UserName">
+        <span class="display-8" style="color:red;" asp-validation-for="UserName"></span>
+
+        <strong><label class="display-8" asp-for="Password"></label></strong>
+        <br />
+        <input type="text" class="display-8 line-field" placeholder="Name" maxlength="50" style="width:100%" asp-for="Password">
+        <span class="display-8" style="color:red;" asp-validation-for="Password"></span>
+
+        <br />
+        <br />
+        <br /><br />
+        <div style="text-align:center">
+            <input type="submit" value="Register" class="display-6 submit-default">
+        </div>
+    </div>
+</form>
