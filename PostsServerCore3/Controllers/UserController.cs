@@ -63,5 +63,15 @@ namespace PostsServerCore3.Controllers
 			await userService.Unsubscribe(user.Id, targetUserId);
 			return Ok(new ResponseModel("Success!"));
 		}
+
+		[Authorize]
+		[HttpPost]
+		[Route("changeProfilePic")]
+		public async Task<IActionResult> ChangeProfilePic([FromForm]ImageVM image)
+		{
+			var user = await userManager.GetUserAsync(User);
+			await userService.ChangeUserProfilePic(user, mapper.Map<Image>(image));
+			return Ok(new ResponseModel("Success"));
+		}
 	}
 }

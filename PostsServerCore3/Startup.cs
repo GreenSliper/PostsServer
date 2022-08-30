@@ -73,6 +73,7 @@ namespace PostsServerCore3
 			//repos
 			services.AddScoped<IRepository<AppUser, string>, UserRepos<ApplicationDbContext>>();
 			services.AddScoped<IRepository<Subscription, string>, SubscriptionsRepos<ApplicationDbContext>>();
+			services.AddScoped<IRepository<Image, string>, ImageRepos<ApplicationDbContext>>();
 			//serv
 			services.AddScoped<IUserService, UserService>();
 		}

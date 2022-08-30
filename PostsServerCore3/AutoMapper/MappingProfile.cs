@@ -9,7 +9,12 @@ namespace PostsServerCore3.AutoMapper
 	{
 		public MappingProfile()
 		{
-			CreateMap<AppUser, AppUserViewModel>().ReverseMap();
+			CreateMap<AppUser, AppUserViewModel>()
+				.ForMember(x => x.SubscribersCount, x => x.MapFrom<SubscribersResolver>())
+				.ForMember(x => x.SubscribtionsCount, x => x.MapFrom<SubscriptionsResolver>());
+			CreateMap<AppUserViewModel, AppUser>();
+			CreateMap<Image, ImageVM>().ConvertUsing(typeof(ImageToVMConverter));
+			CreateMap<ImageVM, Image>().ConvertUsing(typeof(VMToImageConverter));
 		}
 	}
 }

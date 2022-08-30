@@ -17,19 +17,37 @@ namespace Services
 		Task Subscribe(string sourceId, string targetId);
 		Task Unsubscribe(AppUser source, AppUser target);
 		Task Unsubscribe(string sourceId, string targetId);
+		Task ChangeUserProfilePic(string userId, Image newPic);
+		Task ChangeUserProfilePic(AppUser userId, Image newPic);
 	}
 
 	public class UserService: IUserService
 	{
 		private readonly IRepository<AppUser, string> users;
+		private readonly IRepository<Image, string> images;
 		private readonly IRepository<Subscription, string> subscriptions;
 		UserManager<AppUser> userManager;
 		public UserService(IRepository<AppUser, string> users, IRepository<Subscription, string> subscriptions,
-			UserManager<AppUser> userManager)
+			IRepository<Image, string> images, UserManager<AppUser> userManager)
 		{
 			this.users = users;
+			this.images	= images;
 			this.subscriptions = subscriptions;
 			this.userManager = userManager;
+		}
+
+		public async Task ChangeUserProfilePic(string userId, Image newPic)
+		{
+			var user = await users.Get(userId);
+			await ChangeUserProfilePic(user, newPic);
+		}
+
+		public async Task ChangeUserProfilePic(AppUser user, Image newPic)
+		{
+			if (user == null)
+				throw new UserNotFoundException();
+			user.ProfilePic = newPic;
+			await users.SaveChanges();
 		}
 
 		public async Task<AppUser> Login(string username, string password)
