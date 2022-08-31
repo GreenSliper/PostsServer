@@ -12,6 +12,7 @@ namespace PostsServerCore3.Data
 		DbSet<AppUser> AppUsers { get; set; }
 		DbSet<Subscription> Subscriptions { get; set; }
 		DbSet<Image> Images { get; set; }
+		DbSet<Post> Posts { get; set; }
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 			: base(options)
 		{

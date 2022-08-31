@@ -18,7 +18,7 @@ namespace AuthTests
 		{
 			var repos = new Mock<IRepository<AppUser, string>>();
 			var userManager = UserManagerMoq.Create((username, pass));
-			var userService = new UserService(repos.Object, null, userManager.Object);
+			var userService = new UserService(repos.Object, null, null, userManager.Object);
 			var user = await userService.Login(username, pass);
 		}
 
@@ -29,7 +29,7 @@ namespace AuthTests
 		{
 			var repos = new Mock<IRepository<AppUser, string>>();
 			var userManager = UserManagerMoq.Create((username, pass+"123"));
-			var userService = new UserService(repos.Object, null, userManager.Object);
+			var userService = new UserService(repos.Object, null, null, userManager.Object);
 			await Assert.ThrowsAsync<BadCredentialsException>(async () => await userService.Login(username, pass));
 		}
 	}

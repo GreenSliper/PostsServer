@@ -62,7 +62,7 @@ namespace Repostiory
 			return await entities.ToListAsync();
 		}
 
-		public async Task SaveChanges()
+		public virtual async Task SaveChanges()
 		{
 			await context.SaveChangesAsync();
 		}

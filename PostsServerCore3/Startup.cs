@@ -71,11 +71,12 @@ namespace PostsServerCore3
 			//automapper
 			services.AddAutoMapper(typeof(MappingProfile));
 			//repos
-			services.AddScoped<IRepository<AppUser, string>, UserRepos<ApplicationDbContext>>();
-			services.AddScoped<IRepository<Subscription, string>, SubscriptionsRepos<ApplicationDbContext>>();
-			services.AddScoped<IRepository<Image, string>, ImageRepos<ApplicationDbContext>>();
+			services.AddTransient<IRepository<AppUser, string>, UserRepos<ApplicationDbContext>>();
+			services.AddTransient<IRepository<Subscription, string>, SubscriptionsRepos<ApplicationDbContext>>();
+			services.AddTransient<IRepository<Image, string>, ImageRepos<ApplicationDbContext>>();
+			services.AddTransient<IRepository<Post, string>, PostRepos<ApplicationDbContext>>();
 			//serv
-			services.AddScoped<IUserService, UserService>();
+			services.AddTransient<IUserService, UserService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
